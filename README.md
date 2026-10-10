@@ -195,8 +195,8 @@ All errors share one shape, produced by the central error handler:
 
 **Dashboard** – search, filters, sorting, task cards and pagination
 
-![Dashboard](docs/screenshots/image.png)
+![Dashboard](docs/Screenshots/image.png)
 
 **Create task** – form with required-field validation
 
-<img src="docs/screenshots/image-1.png" alt="Create task form" width="480">
+<img src="docs/Screenshots/image-1.png" alt="Create task form" width="480">
