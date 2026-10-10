@@ -13,12 +13,12 @@ A full-stack task manager built with **React (Vite)** and **Node.js + Express**.
 
 ## Tech stack
 
-| Layer | Tech |
-| --- | --- |
+| Layer    | Tech                                                  |
+| -------- | ----------------------------------------------------- |
 | Frontend | React 19, Vite, plain CSS (CSS variables for theming) |
-| Backend | Node.js, Express 4, cors, dotenv, swagger-ui-express |
-| Storage | In-memory array |
-| Tests | Node built-in test runner (`node:test`) |
+| Backend  | Node.js, Express 4, cors, dotenv, swagger-ui-express  |
+| Storage  | In-memory array                                       |
+| Tests    | Node built-in test runner (`node:test`)               |
 
 ## Project structure
 
@@ -79,22 +79,22 @@ Open <http://localhost:5173>.
 
 ### Environment variables
 
-| File | Variable | Default | Purpose |
-| --- | --- | --- | --- |
-| `backend/.env` | `PORT` | `5000` | API port |
-| `backend/.env` | `CORS_ORIGIN` | `http://localhost:5173` | Allowed frontend origin(s), comma separated |
-| `backend/.env` | `NODE_ENV` | `development` | In `production`, 500 errors hide internal messages |
-| `backend/.env` | `SEED_DATA` | `true` | Load sample tasks on startup |
-| `frontend/.env` | `VITE_API_URL` | `http://localhost:5000/api` | Backend base URL |
+| File            | Variable       | Default                     | Purpose                                            |
+| --------------- | -------------- | --------------------------- | -------------------------------------------------- |
+| `backend/.env`  | `PORT`         | `5000`                      | API port                                           |
+| `backend/.env`  | `CORS_ORIGIN`  | `http://localhost:5173`     | Allowed frontend origin(s), comma separated        |
+| `backend/.env`  | `NODE_ENV`     | `development`               | In `production`, 500 errors hide internal messages |
+| `backend/.env`  | `SEED_DATA`    | `true`                      | Load sample tasks on startup                       |
+| `frontend/.env` | `VITE_API_URL` | `http://localhost:5000/api` | Backend base URL                                   |
 
 ### Scripts
 
-| Where | Command | What it does |
-| --- | --- | --- |
-| backend | `npm run dev` | Start with auto-restart |
-| backend | `npm start` | Start normally |
-| backend | `npm test` | Run API tests |
-| frontend | `npm run dev` | Start the dev server |
+| Where    | Command         | What it does                  |
+| -------- | --------------- | ----------------------------- |
+| backend  | `npm run dev`   | Start with auto-restart       |
+| backend  | `npm start`     | Start normally                |
+| backend  | `npm test`      | Run API tests                 |
+| frontend | `npm run dev`   | Start the dev server          |
 | frontend | `npm run build` | Production build into `dist/` |
 
 ## API documentation
@@ -116,41 +116,47 @@ Base URL: `http://localhost:5000`. Interactive docs: `/api/docs` (Swagger UI). A
 }
 ```
 
-| Field | Rules |
-| --- | --- |
-| `title` | required, string, max 100 chars |
-| `description` | required, string, max 1000 chars |
-| `status` | `pending` (default) \| `in_progress` \| `completed` |
-| `priority` | `low` \| `medium` (default) \| `high` |
-| `dueDate` | optional, `YYYY-MM-DD` or `null` |
+| Field         | Rules                                               |
+| ------------- | --------------------------------------------------- |
+| `title`       | required, string, max 100 chars                     |
+| `description` | required, string, max 1000 chars                    |
+| `status`      | `pending` (default) \| `in_progress` \| `completed` |
+| `priority`    | `low` \| `medium` (default) \| `high`               |
+| `dueDate`     | optional, `YYYY-MM-DD` or `null`                    |
 
 ### Endpoints
 
-| Method | Endpoint | Purpose | Success | Errors |
-| --- | --- | --- | --- | --- |
-| GET | `/api/tasks` | List tasks (search, filter, sort, paginate) | 200 | 400 invalid query |
-| GET | `/api/tasks/:id` | Get one task | 200 | 404 |
-| POST | `/api/tasks` | Create a task | 201 | 400 |
-| PUT | `/api/tasks/:id` | Update a task (only supplied fields change; at least one required) | 200 | 400, 404 |
-| DELETE | `/api/tasks/:id` | Delete a task | 200 | 404 |
-| GET | `/api/health` | Health check | 200 | |
+| Method | Endpoint         | Purpose                                                            | Success | Errors            |
+| ------ | ---------------- | ------------------------------------------------------------------ | ------- | ----------------- |
+| GET    | `/api/tasks`     | List tasks (search, filter, sort, paginate)                        | 200     | 400 invalid query |
+| GET    | `/api/tasks/:id` | Get one task                                                       | 200     | 404               |
+| POST   | `/api/tasks`     | Create a task                                                      | 201     | 400               |
+| PUT    | `/api/tasks/:id` | Update a task (only supplied fields change; at least one required) | 200     | 400, 404          |
+| DELETE | `/api/tasks/:id` | Delete a task                                                      | 200     | 404               |
+| GET    | `/api/health`    | Health check                                                       | 200     |                   |
 
 #### `GET /api/tasks` query parameters
 
-| Param | Values | Default |
-| --- | --- | --- |
-| `search` | text matched against title and description (case-insensitive) | |
-| `status` | `pending` \| `in_progress` \| `completed` | |
-| `priority` | `low` \| `medium` \| `high` | |
-| `sortBy` | `createdAt` \| `dueDate` \| `priority` \| `title` | `createdAt` |
-| `order` | `asc` \| `desc` | `desc` |
-| `page` | integer ≥ 1 | `1` |
-| `limit` | integer 1–100 | `10` |
+| Param      | Values                                                        | Default     |
+| ---------- | ------------------------------------------------------------- | ----------- |
+| `search`   | text matched against title and description (case-insensitive) |             |
+| `status`   | `pending` \| `in_progress` \| `completed`                     |             |
+| `priority` | `low` \| `medium` \| `high`                                   |             |
+| `sortBy`   | `createdAt` \| `dueDate` \| `priority` \| `title`             | `createdAt` |
+| `order`    | `asc` \| `desc`                                               | `desc`      |
+| `page`     | integer ≥ 1                                                   | `1`         |
+| `limit`    | integer 1–100                                                 | `10`        |
 
 Response:
 
 ```json
-{ "success": true, "data": [ /* tasks */ ], "meta": { "total": 24, "page": 1, "limit": 10, "totalPages": 3 } }
+{
+  "success": true,
+  "data": [
+    /* tasks */
+  ],
+  "meta": { "total": 24, "page": 1, "limit": 10, "totalPages": 3 }
+}
 ```
 
 #### Example: create
@@ -168,7 +174,11 @@ curl -X POST http://localhost:5000/api/tasks \
 All errors share one shape, produced by the central error handler:
 
 ```json
-{ "success": false, "message": "Validation failed", "errors": { "title": "Title is required" } }
+{
+  "success": false,
+  "message": "Validation failed",
+  "errors": { "title": "Title is required" }
+}
 ```
 
 `errors` is only present for validation failures (400). Unknown routes return a JSON 404 and malformed JSON returns 400.
@@ -183,4 +193,5 @@ All errors share one shape, produced by the central error handler:
 
 ## Screenshots
 
-Add screenshots / a demo video link here before submitting (e.g. `docs/screenshots/dashboard.png`).
+![alt text](image.png)
+![alt text](image-1.png)
